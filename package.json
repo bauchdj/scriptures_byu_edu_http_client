@@ -1,42 +1,42 @@
 {
-	"name": "scriptures-byu-edu-http-client",
-	"version": "0.1.0",
-	"description": "TypeScript SDK for querying the BYU Scripture Citation Index API (for Bun)",
-	"main": "dist/index.js",
-	"types": "dist/index.d.ts",
-	"scripts": {
-		"build": "bun build",
-		"test": "bun test",
-		"bump-version": "bun run scripts/bump-version.ts",
-		"generate-speaker-options": "bun run src/scripts/generateSpeakerOptionsEnum.ts"
-	},
-	"keywords": [
-		"byu",
-		"scriptures",
-		"citation-index",
-		"sdk",
-		"typescript",
-		"bun"
-	],
-	"author": "David Bauch",
-	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "TODO"
-	},
-	"files": [
-		"dist",
-		"README.md",
-		"LICENSE"
-	],
-	"dependencies": {
-		"cheerio": "^1.0.0"
-	},
-	"devDependencies": {
-		"@types/node": "latest",
-		"@types/bun": "latest"
-	},
-	"peerDependencies": {
-		"typescript": "latest"
-	}
+  "name": "scriptures-byu-edu-http-client",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for querying the BYU Scripture Citation Index API (for Bun)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "bun build",
+    "test": "bun test",
+    "bump-version": "bun run scripts/bump-version.ts",
+    "generate-speaker-options": "bun run src/scripts/generateSpeakerOptionsEnum.ts"
+  },
+  "keywords": [
+    "byu",
+    "scriptures",
+    "citation-index",
+    "sdk",
+    "typescript",
+    "bun"
+  ],
+  "author": "David Bauch",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "TODO"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "latest"
+  }
 }
