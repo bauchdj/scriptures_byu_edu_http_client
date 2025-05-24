@@ -1,47 +1,47 @@
 {
-	"name": "scriptures-byu-edu-http-client",
-	"version": "0.1.1",
-	"description": "TypeScript SDK for querying the BYU Scripture Citation Index API (for Bun)",
-	"author": "David Bauch",
-	"license": "MIT",
-	"type": "module",
-	"main": "dist/index.js",
-	"types": "dist/index.d.ts",
-	"scripts": {
-		"build": "bun build $(find src -type f -name '*.ts' ! -path 'src/__tests__/*') --outdir dist && tsc --emitDeclarationOnly --declaration",
-		"test": "bun test",
-		"bump-version": "bun run scripts/bump-version.ts",
-		"generate-speaker-options": "bun run src/scripts/generateSpeakerOptionsEnum.ts"
-	},
-	"keywords": [
-		"byu",
-		"scriptures",
-		"citation",
-		"index",
-		"sdk",
-		"typescript",
-		"bun"
-	],
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/bauchdj/scriptures_byu_edu_http_client"
-	},
-	"dependencies": {
-		"cheerio": "^1.0.0"
-	},
-	"devDependencies": {
-		"@types/node": "latest",
-		"@types/bun": "latest"
-	},
-	"peerDependencies": {
-		"typescript": "latest"
-	},
-	"files": [
-		"dist",
-		"README.md",
-		"LICENSE"
-	],
-	"publishConfig": {
-		"access": "public"
-	}
+  "name": "scriptures-byu-edu-http-client",
+  "version": "0.1.2",
+  "description": "TypeScript SDK for querying the BYU Scripture Citation Index API (for Bun)",
+  "author": "David Bauch",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "bun build $(find src -type f -name '*.ts' ! -path 'src/__tests__/*') --outdir dist && tsc --emitDeclarationOnly --declaration",
+    "test": "bun test",
+    "bump-version": "bun run scripts/bump-version.ts",
+    "generate-speaker-options": "bun run src/scripts/generateSpeakerOptionsEnum.ts"
+  },
+  "keywords": [
+    "byu",
+    "scriptures",
+    "citation",
+    "index",
+    "sdk",
+    "typescript",
+    "bun"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bauchdj/scriptures_byu_edu_http_client"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "latest"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }
