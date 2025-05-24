@@ -8,7 +8,7 @@
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"scripts": {
-		"build": "bun build src/client.ts --outdir dist && tsc --emitDeclarationOnly --declaration",
+		"build": "bun build $(find src -type f -name '*.ts' ! -path 'src/__tests__/*') --outdir dist && tsc --emitDeclarationOnly --declaration",
 		"test": "bun test",
 		"bump-version": "bun run scripts/bump-version.ts",
 		"generate-speaker-options": "bun run src/scripts/generateSpeakerOptionsEnum.ts"
