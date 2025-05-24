@@ -1,9 +1,9 @@
 import {
-	CitationIndexQuery,
+	type CitationIndexQuery,
 	ScriptureSourceFlag,
-	SortOrder,
-	SourceFlag,
-	Tab,
+	type SortOrder,
+	type SourceFlag,
+	type Tab,
 	TalkSourceFlag,
 } from "./types";
 

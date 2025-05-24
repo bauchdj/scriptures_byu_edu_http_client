@@ -32,26 +32,26 @@ function generateSpeakerOptionsEnum(speakerOptionValues: string[]) {
 	const speakerNames = new Set<string>();
 	const speakerNameCount = new Map<string, number>();
 	for (const value of speakerOptionValues) {
-		if (value.includes("--")) {
-			const rawSpeakerName = value.split("--")[1];
-			const sanitizedSpeakerName = rawSpeakerName
-				.replace(/\(.*\)/g, "")
-				.replace(/\W+/g, "");
-
-			const count = speakerNameCount.get(sanitizedSpeakerName) || 0;
-			const newCount = count + 1;
-			speakerNameCount.set(sanitizedSpeakerName, newCount);
-			let updatedSpeakerName = sanitizedSpeakerName;
-			if (count > 0) {
-				updatedSpeakerName += `_${newCount}`;
-			}
-			speakerNames.add(updatedSpeakerName);
-
-			const newEnumLine = `${updatedSpeakerName} = "${value}",`;
-			enumString += `\t${newEnumLine}\n`;
-		} else {
+		const rawSpeakerName = value.split("--")[1];
+		if (rawSpeakerName === undefined) {
 			console.error(`Invalid value: ${value}`);
+			continue;
 		}
+		const sanitizedSpeakerName = rawSpeakerName
+			.replace(/\(.*\)/g, "")
+			.replace(/\W+/g, "");
+
+		const count = speakerNameCount.get(sanitizedSpeakerName) || 0;
+		const newCount = count + 1;
+		speakerNameCount.set(sanitizedSpeakerName, newCount);
+		let updatedSpeakerName = sanitizedSpeakerName;
+		if (count > 0) {
+			updatedSpeakerName += `_${newCount}`;
+		}
+		speakerNames.add(updatedSpeakerName);
+
+		const newEnumLine = `${updatedSpeakerName} = "${value}",`;
+		enumString += `\t${newEnumLine}\n`;
 	}
 	enumString += "}";
 	return enumString;

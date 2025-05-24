@@ -14,5 +14,5 @@ export async function fetchCitationResults(
 			`API request failed: ${response.status} ${response.statusText}`
 		);
 	}
-	return await response.json();
+	return (await response.json()) as CitationIndexResult;
 }

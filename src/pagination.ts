@@ -3,9 +3,9 @@
  */
 
 export function getNextOffset(currentOffset: number, pageSize: number): number {
-  return currentOffset + pageSize;
+	return currentOffset + pageSize;
 }
 
 export function getPrevOffset(currentOffset: number, pageSize: number): number {
-  return Math.max(0, currentOffset - pageSize);
+	return Math.max(0, currentOffset - pageSize);
 }
