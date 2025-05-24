@@ -1,0 +1,56 @@
+name: Publish Package to npmjs
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+    publish:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                fetch-depth: 0  # Fetch all history and tags
+            
+            - uses: oven-sh/setup-bun@v2
+            
+            - name: Install dependencies
+              run: bun install
+            
+            - name: Publish to npm
+              id: npm-publish
+              run: |
+                echo "Publishing to npm..."
+                if bun publish; then
+                  echo "npm_publish_successful=true" >> $GITHUB_OUTPUT
+                else
+                  echo "npm_publish_successful=false" >> $GITHUB_OUTPUT
+                  exit 1
+                fi
+              env:
+                  NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+            - name: Install gh CLI
+              if: steps.npm-publish.outputs.npm_publish_successful == 'true'
+              run: |
+                if ! command -v gh > /dev/null; then
+                  sudo apt-get update
+                  sudo apt-get install -y gh
+                fi
+
+            - name: Create GitHub Release
+              if: steps.npm-publish.outputs.npm_publish_successful == 'true'
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                TAG_NAME=$(git describe --tags --abbrev=0)
+                PACKAGE_VERSION=$(bun x --bun jq -r .version package.json)
+                RELEASE_NOTES="Release v${PACKAGE_VERSION}
+
+                This release has been published to npm using Bun."
+                
+                gh release create "$TAG_NAME" \
+                  --title "Release $TAG_NAME" \
+                  --notes "$RELEASE_NOTES" \
+                  --verify-tag || echo "Release may already exist."
