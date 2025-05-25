@@ -1,7 +1,6 @@
 import {
 	type CitationIndexQuery,
 	ScriptureSourceFlag,
-	type SortOrder,
 	type SourceFlag,
 	type Tab,
 	TalkSourceFlag,
@@ -40,15 +39,29 @@ function validateSources(tab: Tab, sources: SourceFlag[]): string {
 export function buildCitationIndexUrl(params: CitationIndexQuery): string {
 	const base =
 		"https://scriptures.byu.edu/citation_index/search_results_ajax";
-	const tab = params.tab;
-	const speakerId = params.speakerId ?? "";
-	const startYear = params.startYear ?? "";
-	const endYear = params.endYear ?? "";
-	const sources = validateSources(tab, params.sources);
-	const sort = params.sort ?? "r";
-	const pageSize = params.pageSize ?? 30;
-	const offset = params.offset ?? 0;
-	const luceneQuery = params.query;
+	const tab = encodeURIComponent(params.tab);
+	const sort = encodeURIComponent(params.sort ?? "r");
+	const pageSize = encodeURIComponent((params.pageSize ?? 30).toString());
+	const offset = encodeURIComponent((params.offset ?? 0).toString());
+	const luceneQuery = encodeURIComponent(params.query);
 
-	return `${base}/${tab}&${speakerId}&${startYear}&${endYear}&${sources}&${sort}&${pageSize}@${offset}$${luceneQuery}`;
+	if (params.tab === "t") {
+		const speakerId = encodeURIComponent(params.speakerId ?? "");
+		const startYear = encodeURIComponent(
+			params.startYear?.toString() ?? ""
+		);
+		const endYear = encodeURIComponent(params.endYear?.toString() ?? "");
+		const sources = encodeURIComponent(
+			validateSources("t", params.sources)
+		);
+		return `${base}/${tab}&${speakerId}&${startYear}&${endYear}&${sources}&${sort}&${pageSize}@${offset}$${luceneQuery}`;
+	} else if (params.tab === "s") {
+		const sources = encodeURIComponent(
+			validateSources("s", params.sources)
+		);
+		// Scriptures format: /s&sources&sort&pageSize@offset$query
+		return `${base}/${tab}&${sources}&${sort}&${pageSize}@${offset}$${luceneQuery}`;
+	} else {
+		throw new Error(`Invalid tab value: ${params}`);
+	}
 }

@@ -21,24 +21,51 @@ export enum ScriptureSourceFlag {
 	JST = "j",
 }
 
+// SourceFlag is still useful for generic code, but each query type uses its own specific flag array.
 export type SourceFlag = TalkSourceFlag | ScriptureSourceFlag;
 
 export type SortOrder = "r" | "n";
 
-export interface CitationIndexQuery {
-	tab: Tab;
+/**
+ * Citation query for Talks tab ('t').
+ * Includes speakerId, startYear, endYear.
+ */
+export interface TalksCitationIndexQuery {
+	tab: "t";
 	speakerId?: string; // empty string or numeric
 	startYear?: number;
 	endYear?: number;
-	sources: SourceFlag[];
+	sources: TalkSourceFlag[];
 	sort?: SortOrder;
 	pageSize?: number;
 	offset?: number;
 	query: string;
 }
 
+/**
+ * Citation query for Scriptures tab ('s').
+ * Does NOT include speakerId, startYear, endYear.
+ */
+export interface ScripturesCitationIndexQuery {
+	tab: "s";
+	sources: ScriptureSourceFlag[];
+	sort?: SortOrder;
+	pageSize?: number;
+	offset?: number;
+	query: string;
+}
+
+/**
+ * Union type for citation queries.
+ */
+export type CitationIndexQuery =
+	| TalksCitationIndexQuery
+	| ScripturesCitationIndexQuery;
+
 // Example response type (to be updated after first fetch)
+export const resultTitleClass = "resultTitle";
+export const resultContextClass = "resultContext";
 export interface CitationIndexResult {
-	// TODO: define based on actual API response
-	[key: string]: any;
+	[resultTitleClass]: string;
+	[resultContextClass]: string;
 }
