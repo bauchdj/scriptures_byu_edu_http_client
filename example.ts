@@ -14,7 +14,7 @@ async function exampleScripturesSearch() {
 			ScriptureSourceFlag.BookOfMormon,
 		],
 		sort: "r",
-		pageSize: 30,
+		pageSize: 100,
 		offset: 0,
 		query: "faith+ hope+ charity+",
 	};
@@ -29,7 +29,7 @@ async function exampleTalksSearch() {
 		endYear: 2025,
 		sources: [TalkSourceFlag.GeneralConference],
 		sort: "r",
-		pageSize: 30,
+		pageSize: 100,
 		offset: 0,
 		query: "faith",
 	};
@@ -39,8 +39,8 @@ async function exampleTalksSearch() {
 
 async function main() {
 	const scripturesResult = await exampleScripturesSearch();
+	console.log(scripturesResult);
 	const talksResult = await exampleTalksSearch();
-	// console.log(scripturesResult);
 	console.log(talksResult);
 }
 
